@@ -1,0 +1,110 @@
+:root {
+    --navbarText: whitesmoke;
+    --bodyFont: Montserrat;
+  }
+
+body {
+    min-height: 100vh;
+    /* overflow-x: hidden; */
+}
+
+.wrapper {
+width: 98vw;
+margin: 0 auto;
+background-color: grey;
+/* overflow: hidden; */
+/* background-image: url(/assets/temp-home-br.png); */
+}
+  
+.flex {
+    display: flex;
+    gap: var(--gap, 1rem);
+}
+
+/* Primary Header */
+.primary-header {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.primary-navigation {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: hsl(0 0% 0% / 0.5);
+    /* background-color: #000000BF; */
+}
+
+.mobile-nav-toggle {
+    display: none;
+}
+
+@supports (backdrop-filter: blur(0.5rem)) {
+    .primary-navigation {
+        background-color: hsl(0 0% 100% / 0.1);
+        backdrop-filter: blur(0.5rem); /*TEST THIS*/
+    }
+}
+
+.primary-navigation a {
+    text-decoration: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+@media (min-width: 47em) {
+    .primary-navigation {
+        /* --gap: clamp(1.5rem, 5vw, 3rem); */
+        padding-block: 1.5rem;
+        padding-inline: clamp(0.75rem, 5vw, 3rem);
+    }
+}
+
+@media (max-width: 47em) { /*mobile sizes */
+    .primary-navigation {
+        --gap: 3em;
+
+        position: fixed;
+        z-index: 1000;
+        inset: 0 0 0 30%;
+        flex-direction: column;
+        padding: min(30vh, 10rem) 2em;
+        transform: translateX(100%);
+        transition: transform 350ms ease-out;
+    }
+
+    .primary-navigation[data-visible="true"] {
+        transform: translateX(0%);
+    }
+
+    .mobile-nav-toggle {
+        position: absolute;
+        display: block;
+        z-index: 9999;
+        width: 2.8rem;
+        aspect-ratio: 1;
+        top: 2.5rem;
+        right: 2rem;
+        background-color: transparent;
+        background-image: url(/assets/hamburger.svg);
+        background-repeat: no-repeat;
+        border: 0;
+    }
+
+    .mobile-nav-toggle[aria-expanded="true"] {
+        background-image: url(/assets/close.svg);
+    }
+}
+
+.logo {
+    margin: 2rem;
+}
